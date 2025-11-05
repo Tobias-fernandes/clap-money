@@ -10,7 +10,7 @@ import {
 import { CommandGroup } from "cmdk";
 import { LayoutDashboard, Settings } from "lucide-react";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const paths = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -18,9 +18,9 @@ const paths = [
 ];
 
 const CommandMenu = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
-  const handleOpenCommand = useCallback(() => {
+  useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if ((e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
@@ -32,10 +32,6 @@ const CommandMenu = () => {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
-  useEffect(() => {
-    handleOpenCommand();
-  }, [handleOpenCommand]);
-
   return (
     <CommandDialog
       open={open}
@@ -45,7 +41,7 @@ const CommandMenu = () => {
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Suggestions" className="text-sm py-2">
+        <CommandGroup heading="Suggestions" className="text-sm">
           {paths.map((path) => (
             <CommandItem
               key={path.href}
