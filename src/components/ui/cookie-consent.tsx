@@ -1,0 +1,58 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { getCookie, setCookie } from "@/shared/lib/cookies";
+
+const COOKIE_NAME = "cookie-consent";
+
+const CookieConsent: React.FC = () => {
+  const [visible, setVisible] = useState<boolean>(false);
+
+  const handleAccept = () => {
+    setCookie(COOKIE_NAME, "true");
+    setVisible(false);
+  };
+
+  const handleDecline = () => {
+    setVisible(false);
+  };
+
+  const checkCookieConsent = useCallback(() => {
+    const consent = getCookie(COOKIE_NAME);
+    if (!consent) {
+      setVisible(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    checkCookieConsent();
+  }, [checkCookieConsent]);
+
+  if (!visible) return null;
+
+  return (
+    <div className="fixed bottom-4 left-4 max-sm:right-4 z-50 flex justify-center">
+      <Card className="max-w-lg w-full shadow-lg border border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
+        <CardContent className="flex flex-col gap-3 px-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-muted-foreground">
+            We use cookies to improve your experience on our site. By continuing
+            to use our site, you accept our policy.
+          </p>
+          <div className="flex gap-2 justify-end">
+            <Button variant="outline" size="sm" onClick={handleDecline}>
+              Decline
+            </Button>
+            <Button size="sm" onClick={handleAccept}>
+              Accept
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+export default CookieConsent;
