@@ -3,15 +3,31 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ToggleDarkMode } from "@/components/ui/toggleDarkMode";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LogOut } from "lucide-react";
+import { Settings, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const Header: React.FC = () => {
   const router = useRouter();
 
+  const handleGetUserConfig = () => {
+    router.push("/user");
+  };
+
   const handleLogOut = () => {
     // Handle logout logic here
     router.push("/");
+  };
+
+  const getUserName = () => {
+    // TODO: Get user name from database
+    const userName = "Tobias";
+    return <span className="font-medium capitalize">{userName}</span>;
+  };
+
+  const getUserAvatar = () => {
+    // TODO: Get user photo from database
+    const userPhoto = "https://github.com/shadcn.png";
+    return userPhoto;
   };
 
   return (
@@ -20,19 +36,19 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-3">
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarImage src={getUserAvatar()} />
               <AvatarFallback>
                 <Skeleton className="h-6 w-6 rounded-full" />
               </AvatarFallback>
             </Avatar>
-            {/*TODO: Get user name from database */}
-            <span className="capitalize">tobias</span>
+            {getUserName()}
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
           <ToggleDarkMode />
-          <LogOut className="ml-4 cursor-pointer" onClick={handleLogOut} />
+          <Settings className="cursor-pointer" onClick={handleGetUserConfig} />
+          <LogOut className="cursor-pointer" onClick={handleLogOut} />
         </div>
       </div>
     </header>

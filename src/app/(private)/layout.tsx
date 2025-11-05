@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Header from "@/shared/components/private/header";
+import { CommandMenu } from "@/shared/components/private/commandMenu";
 
 export default function Layout({
   children,
@@ -10,6 +11,7 @@ export default function Layout({
     <>
       <Header />
       {children}
+      <CommandMenu />
     </>
   );
 }

@@ -27,7 +27,7 @@ const signUpWithEmail = async (email: string, password: string) => {};
 
 const formSchema = z
   .object({
-    email: z.string().email({
+    email: z.email({
       message: "Please, insert a valid email.",
     }),
     password: z

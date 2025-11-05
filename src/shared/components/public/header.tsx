@@ -54,7 +54,9 @@ const Header: React.FC = () => {
   return (
     <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 backdrop-blur-md bg-background/70 border border-border shadow-md rounded-2xl px-6 py-3 w-[90%] max-w-7xl transition-all duration-300">
       <div className="hidden md:flex justify-between items-center">
-        <Link href="/">Logo aqui</Link>
+        <Link href="/" className="font-bold text-lg">
+          ClapMoney
+        </Link>
 
         <nav className="flex gap-5">
           <NavigationMenu />
@@ -69,7 +71,9 @@ const Header: React.FC = () => {
       </div>
 
       <div className="md:hidden flex justify-between items-center">
-        <Link href="/">Logo aqui</Link>
+        <Link href="/" className="font-bold text-lg">
+          ClapMoney
+        </Link>
 
         <Drawer>
           <DrawerTrigger asChild>

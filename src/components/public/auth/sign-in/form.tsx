@@ -22,7 +22,7 @@ import { toast } from "sonner";
 import { Loader2Icon } from "lucide-react";
 
 const formSchema = z.object({
-  email: z.string().email({
+  email: z.email({
     message: "Please, insert a valid email.",
   }),
   password: z.string().min(6, {
