@@ -19,8 +19,10 @@ const Header: React.FC = () => {
 
   const handleLogOut = async () => {
     const { error } = await supabase.auth.signOut();
-    
+
     if (error) return toast.error("Error logging out. Please try again.");
+
+    if (!error) toast.success("Logged out successfully.");
     router.push("/");
   };
 
