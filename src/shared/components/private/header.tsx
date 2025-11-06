@@ -5,6 +5,10 @@ import { ToggleDarkMode } from "@/components/ui/toggleDarkMode";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Settings, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { createClient } from "@/database/supabaseClient";
+
+const supabase = createClient();
 
 const Header: React.FC = () => {
   const router = useRouter();
@@ -13,8 +17,10 @@ const Header: React.FC = () => {
     router.push("/user");
   };
 
-  const handleLogOut = () => {
-    // Handle logout logic here
+  const handleLogOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    
+    if (error) return toast.error("Error logging out. Please try again.");
     router.push("/");
   };
 

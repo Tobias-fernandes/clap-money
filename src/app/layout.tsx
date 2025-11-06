@@ -4,6 +4,7 @@ import { Outfit } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "next-themes";
 import CookieConsent from "@/components/ui/cookie-consent";
+import { Toaster } from "@/components/ui/sonner";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -34,6 +35,7 @@ export default function RootLayout({
         >
           {children}
           <CookieConsent />
+          <Toaster richColors />
         </ThemeProvider>
       </body>
     </html>

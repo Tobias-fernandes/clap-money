@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -23,7 +22,17 @@ import { Loader2Icon } from "lucide-react";
 
 import { useRouter } from "next/navigation";
 
-const signUpWithEmail = async (email: string, password: string) => {};
+import { createClient } from "@/database/supabaseClient";
+
+const supabase = createClient();
+
+const signUpWithEmail = async (email: string, password: string) => {
+  const { error } = await supabase.auth.signUp({ email, password });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+};
 
 const formSchema = z
   .object({
@@ -76,7 +85,17 @@ const LoginForm = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {}
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      await signUpWithEmail(values.email, values.password);
+      toast.success("Account created successfully! Please check your email.");
+      router.push("/sign-in");
+    } catch (err) {
+      toast.error(
+        (err as Error).message || "Something went wrong. Please try again."
+      );
+    }
+  }
 
   return (
     <Form {...form}>

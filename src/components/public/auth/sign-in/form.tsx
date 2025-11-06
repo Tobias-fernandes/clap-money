@@ -20,6 +20,9 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { toast } from "sonner";
 import { Loader2Icon } from "lucide-react";
+import { createClient } from "@/database/supabaseClient";
+
+const supabase = createClient();
 
 const formSchema = z.object({
   email: z.email({
@@ -30,7 +33,14 @@ const formSchema = z.object({
   }),
 });
 
-const signInWithEmail = async (email: string, password: string) => {};
+const signInWithEmail = async (email: string, password: string) => {
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (error) throw new Error(error.message);
+};
 
 const SignInHeader: React.FC = () => {
   return (
@@ -73,7 +83,18 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {};
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      await signInWithEmail(values.email, values.password);
+
+      toast.success("Successfully signed in!");
+      router.push("/dashboard");
+    } catch (error) {
+      toast.error(
+        (error as Error).message || "Something went wrong. Please try again."
+      );
+    }
+  };
 
   return (
     <Form {...form}>
