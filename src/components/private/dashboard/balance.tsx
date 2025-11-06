@@ -16,7 +16,9 @@ interface IBalance {
   This component displays the user's current balance (incomes - expenses).
 */
 const Balance: React.FC<IBalance> = ({ income, expense }) => {
-  const isPositiveBalance = income - expense >= 0;
+  const balance = income - expense;
+  const isPositiveBalance = balance >= 0;
+  const formattedBalance = balance.toFixed(2);
 
   return (
     <Card className="w-full">
@@ -26,8 +28,12 @@ const Balance: React.FC<IBalance> = ({ income, expense }) => {
       </CardHeader>
       <CardContent className="flex gap-2 items-center">
         <Scale />
-        <span className={`text-2xl font-bold ${isPositiveBalance ? "text-clap-green" : "text-clap-red"}`}>
-          ${(income - expense).toFixed(2)}
+        <span
+          className={`text-2xl font-bold ${
+            isPositiveBalance ? "text-clap-green" : "text-clap-red"
+          }`}
+        >
+          ${formattedBalance}
         </span>
       </CardContent>
     </Card>

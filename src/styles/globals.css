@@ -44,6 +44,7 @@
   --color-clap-green: var(--clap-green);
   --color-clap-green-hover: var(--clap-green-hover);
   --color-clap-green-soft: var(--clap-green-soft);
+  --color-clap-red: var(--clap-red);
   --breakpoint-xs: 30rem;
 }
 

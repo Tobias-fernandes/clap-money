@@ -30,7 +30,7 @@ const chartData = [
 
 const BalanceChart = () => {
   return (
-    <ChartContainer config={chartConfig} className="h-[400px] w-full">
+    <ChartContainer config={chartConfig} className="w-full">
       <BarChart accessibilityLayer data={chartData}>
         <CartesianGrid vertical={false} />
         <XAxis

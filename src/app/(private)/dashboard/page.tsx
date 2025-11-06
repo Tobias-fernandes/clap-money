@@ -42,7 +42,7 @@ const Dashboard: React.FC = async () => {
           <Incomes income={data.income} />
           <Expenses expense={data.expense} />
         </div>
-        <div className="flex">
+        <div className="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
           <LastExpenses list={listExpenses} />
           <BalanceChart />
         </div>

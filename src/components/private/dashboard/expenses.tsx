@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { BanknoteArrowUp } from "lucide-react";
+import { BanknoteArrowDown } from "lucide-react";
 import {
   Dialog,
   DialogClose,
@@ -64,6 +64,8 @@ const ModalCreateExpense = () => {
   This component displays the user's current expenses.
 */
 const Expenses: React.FC<IExpense> = ({ expense }) => {
+  const expenseValue = expense.toFixed(2);
+
   return (
     <Card className="w-full">
       <CardHeader>
@@ -72,8 +74,10 @@ const Expenses: React.FC<IExpense> = ({ expense }) => {
       </CardHeader>
       <CardContent className="flex gap-2 items-center flex-wrap">
         <div className="flex gap-2 items-center">
-          <BanknoteArrowUp />
-          <span className="text-2xl font-bold">${expense.toFixed(2)}</span>
+          <BanknoteArrowDown />
+          <span className="text-2xl font-bold text-clap-red">
+            ${expenseValue}
+          </span>
         </div>
 
         <ModalCreateExpense />

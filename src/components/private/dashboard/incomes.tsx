@@ -64,6 +64,8 @@ const ModalCreateIncome = () => {
   This component displays the user's current incomes.
 */
 const Incomes: React.FC<IIncome> = ({ income }) => {
+  const incomeValue = income.toFixed(2);
+
   return (
     <Card className="w-full">
       <CardHeader>
@@ -73,7 +75,7 @@ const Incomes: React.FC<IIncome> = ({ income }) => {
       <CardContent className="flex gap-2 items-center flex-wrap">
         <div className="flex gap-2 items-center">
           <BanknoteArrowUp />
-          <span className="text-2xl font-bold">${income.toFixed(2)}</span>
+          <span className="text-2xl font-bold text-clap-green">${incomeValue}</span>
         </div>
 
         <ModalCreateIncome />

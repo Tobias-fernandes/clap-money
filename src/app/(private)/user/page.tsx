@@ -30,12 +30,10 @@ const UserConfig: React.FC = () => {
           className="absolute left-4 -top-16"
           onClick={handleBack}
         />
-
         <h1 className="text-2xl font-bold">User Profile</h1>
         <p className="text-muted-foreground">
           Manage your account settings and preferences.
         </p>
-
         <Card className="w-full">
           <CardHeader>
             <CardTitle>Personal Information</CardTitle>
@@ -46,6 +44,16 @@ const UserConfig: React.FC = () => {
             <ProfileForm />
             <NameForm />
             <EmailForm />
+          </CardContent>
+        </Card>
+
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Preferences</CardTitle>
+            <Line />
+            <CardDescription></CardDescription>
+          </CardHeader>
+          <CardContent className="sm:ml-10">
           </CardContent>
         </Card>
 
