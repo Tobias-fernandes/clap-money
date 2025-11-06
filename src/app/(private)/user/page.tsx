@@ -1,9 +1,9 @@
 "use client";
 
-import { DeleteAccountForm } from "@/components/private/user/delete-account-form";
-import { EmailForm } from "@/components/private/user/email-form";
-import { NameForm } from "@/components/private/user/name-form";
-import { ProfileForm } from "@/components/private/user/profile-form";
+import { DeleteAccountForm } from "@/components/private/user/deleteAccountForm";
+import { EmailForm } from "@/components/private/user/emailForm";
+import { NameForm } from "@/components/private/user/nameForm";
+import { ProfileForm } from "@/components/private/user/profileForm";
 import {
   Card,
   CardContent,

@@ -83,6 +83,7 @@
   --clap-green: oklch(62% 0.24 140deg);
   --clap-green-hover: oklch(58% 0.27 140deg);
   --clap-green-soft: oklch(78% 0.14 140deg);
+  --clap-red: oklch(48% 0.26 25deg);
 }
 
 .dark {
@@ -120,6 +121,7 @@
   --clap-green: oklch(48% 0.26 140deg);
   --clap-green-hover: oklch(44% 0.28 140deg);
   --clap-green-soft: oklch(28% 0.18 140deg);
+  --clap-red: oklch(48% 0.26 25deg);
 }
 
 @layer base {

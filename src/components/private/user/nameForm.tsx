@@ -16,7 +16,9 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 
 const formSchema = z.object({
-  name: z.string().min(1, { message: "Name is required." }),
+  name: z.string().min(1, { message: "Name is required." }).max(30, {
+    message: "Name must be at most 30 characters long.",
+  }),
 });
 
 const NameForm = () => {
@@ -41,7 +43,7 @@ const NameForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmitUserName)}
-        className="flex items-center"
+        className="flex items-center gap-4"
       >
         <FormField
           control={form.control}
@@ -58,6 +60,7 @@ const NameForm = () => {
         />
         <Button
           type="submit"
+          className="mt-5"
           disabled={form.formState.isSubmitting || !form.formState.isValid}
         >
           {form.formState.isSubmitting && (

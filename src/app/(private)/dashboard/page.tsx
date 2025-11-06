@@ -1,4 +1,5 @@
 import Balance from "@/components/private/dashboard/balance";
+import { BalanceChart } from "@/components/private/dashboard/balanceChart";
 import Expenses from "@/components/private/dashboard/expenses";
 import Incomes from "@/components/private/dashboard/incomes";
 import LastExpenses from "@/components/private/dashboard/lastExpenses";
@@ -34,15 +35,18 @@ const listExpenses = [
 
 const Dashboard: React.FC = async () => {
   return (
-    <section className="mt-24 sm:mt-28 md:mt-32 lg:mt-36">
+    <section className="mt-24 sm:mt-28 md:mt-32 lg:mt-36 h-screen">
       <div className="container px-6 max-w-5xl mx-auto space-y-4">
         <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
           <Balance income={data.income} expense={data.expense} />
           <Incomes income={data.income} />
           <Expenses expense={data.expense} />
         </div>
-        <div>
+        <div className="flex">
           <LastExpenses list={listExpenses} />
+          <BalanceChart />
+        </div>
+        <div>
         </div>
       </div>
     </section>
