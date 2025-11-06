@@ -1,15 +1,18 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { DeleteAccountForm } from "@/components/private/user/delete-account-form";
+import { EmailForm } from "@/components/private/user/email-form";
+import { NameForm } from "@/components/private/user/name-form";
+import { ProfileForm } from "@/components/private/user/profile-form";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-  
 } from "@/components/ui/card";
 import { ButtonBack } from "@/shared/components/public/buttonBack";
+import { Line } from "@/shared/components/public/line";
 import { useRouter } from "next/navigation";
 
 const UserConfig: React.FC = () => {
@@ -27,6 +30,7 @@ const UserConfig: React.FC = () => {
           className="absolute left-4 -top-16"
           onClick={handleBack}
         />
+
         <h1 className="text-2xl font-bold">User Profile</h1>
         <p className="text-muted-foreground">
           Manage your account settings and preferences.
@@ -35,11 +39,26 @@ const UserConfig: React.FC = () => {
         <Card className="w-full">
           <CardHeader>
             <CardTitle>Personal Information</CardTitle>
-            <div className="bg-primary/20 h-px w-full my-3"></div>
+            <Line />
             <CardDescription></CardDescription>
           </CardHeader>
-          <CardContent className="flex gap-2 items-center">
-            <div></div>
+          <CardContent className="sm:ml-10 space-y-12 max-w-sm">
+            <ProfileForm />
+            <NameForm />
+            <EmailForm />
+          </CardContent>
+        </Card>
+
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle className="text-red-500 font-bold">
+              DANGER ZONE
+            </CardTitle>
+            <Line />
+            <CardDescription></CardDescription>
+          </CardHeader>
+          <CardContent className="sm:ml-10">
+            <DeleteAccountForm />
           </CardContent>
         </Card>
       </div>

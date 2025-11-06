@@ -16,7 +16,8 @@ const Hero: React.FC = () => {
         <Button
           asChild
           size="lg"
-          className="max-sm:w-full transition-all hover:scale-[1.02]"
+          variant={"clap"}
+          className="text-lg max-sm:w-full transition-all hover:scale-[1.02]"
         >
           <Link href="/dashboard">Get Started</Link>
         </Button>

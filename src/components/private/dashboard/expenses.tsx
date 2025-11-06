@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -21,9 +22,15 @@ const Expenses: React.FC<IExpense> = ({ expense }) => {
         <CardTitle>Expenses</CardTitle>
         <CardDescription></CardDescription>
       </CardHeader>
-      <CardContent className="flex gap-2 items-center">
-        <BanknoteArrowUp />
-        <span className="text-2xl font-bold">${expense.toFixed(2)}</span>
+      <CardContent className="flex gap-2 items-center flex-wrap">
+        <div className="flex gap-2 items-center">
+          <BanknoteArrowUp />
+          <span className="text-2xl font-bold">${expense.toFixed(2)}</span>
+        </div>
+
+        <Button variant="outline" size="sm" className="ml-auto">
+          Add Expense
+        </Button>
       </CardContent>
     </Card>
   );

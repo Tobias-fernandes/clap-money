@@ -41,6 +41,10 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --color-clap-green: var(--clap-green);
+  --color-clap-green-hover: var(--clap-green-hover);
+  --color-clap-green-soft: var(--clap-green-soft);
+  --breakpoint-xs: 30rem;
 }
 
 :root {
@@ -76,6 +80,9 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --clap-green: oklch(62% 0.24 140deg);
+  --clap-green-hover: oklch(58% 0.27 140deg);
+  --clap-green-soft: oklch(78% 0.14 140deg);
 }
 
 .dark {
@@ -110,6 +117,9 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --clap-green: oklch(48% 0.26 140deg);
+  --clap-green-hover: oklch(44% 0.28 140deg);
+  --clap-green-soft: oklch(28% 0.18 140deg);
 }
 
 @layer base {

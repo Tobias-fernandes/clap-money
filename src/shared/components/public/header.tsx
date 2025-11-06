@@ -16,6 +16,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { Line } from "./line";
 
 interface MenuItens {
   name: string;
@@ -39,7 +40,7 @@ const NavigationMenu: React.FC = () => {
           className={cn(
             "text-lg transition-colors",
             pathName === href || pathName?.startsWith(`${href}/`)
-              ? "font-bold"
+              ? "font-bold text-clap-green"
               : "font-normal"
           )}
         >
@@ -64,7 +65,7 @@ const Header: React.FC = () => {
 
         <div className="flex items-center gap-4">
           <ToggleDarkMode />
-          <Button asChild>
+          <Button variant={"clap"} asChild>
             <Link href="/sign-in">Login</Link>
           </Button>
         </div>
@@ -101,10 +102,10 @@ const Header: React.FC = () => {
                 </div>
               </div>
               <DrawerFooter>
-                <div className="bg-gray-200 h-0.5 w-full my-3"></div>
+                <Line />
                 <ToggleDarkMode />
                 <DrawerClose asChild>
-                  <Button asChild type="button" size={"lg"}>
+                  <Button asChild type="button" variant={"clap"} size={"lg"}>
                     <Link className="w-full" href="/sign-in">
                       Log In
                     </Link>

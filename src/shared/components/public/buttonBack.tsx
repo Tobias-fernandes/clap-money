@@ -1,14 +1,10 @@
-import { Button, buttonVariants } from "@/components/ui/button";
-import { VariantProps } from "class-variance-authority";
+"use client";
 
+import { Button } from "@/components/ui/button";
+import { IButton } from "@/shared/types/button";
 import { ArrowLeft } from "lucide-react";
-import { ButtonHTMLAttributes } from "react";
 
-interface IButtonBack
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {}
-
-const ButtonBack: React.FC<IButtonBack> = ({ ...props }) => {
+const ButtonBack: React.FC<IButton> = ({ ...props }) => {
   return (
     <Button {...props}>
       <ArrowLeft className="h-6 w-6 text-muted-foreground hover:text-foreground cursor-pointer" />

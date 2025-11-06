@@ -32,14 +32,14 @@ const listExpenses = [
   },
 ];
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC = async () => {
   return (
     <section className="mt-24 sm:mt-28 md:mt-32 lg:mt-36">
       <div className="container px-6 max-w-5xl mx-auto space-y-4">
         <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+          <Balance income={data.income} expense={data.expense} />
           <Incomes income={data.income} />
           <Expenses expense={data.expense} />
-          <Balance income={data.income} expense={data.expense} />
         </div>
         <div>
           <LastExpenses list={listExpenses} />

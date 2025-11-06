@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -21,9 +22,15 @@ const Incomes: React.FC<IIncome> = ({ income }) => {
         <CardTitle>Incomes</CardTitle>
         <CardDescription></CardDescription>
       </CardHeader>
-      <CardContent className="flex gap-2 items-center">
-        <BanknoteArrowUp />
-        <span className="text-2xl font-bold">${income.toFixed(2)}</span>
+      <CardContent className="flex gap-2 items-center flex-wrap">
+        <div className="flex gap-2 items-center">
+          <BanknoteArrowUp />
+          <span className="text-2xl font-bold">${income.toFixed(2)}</span>
+        </div>
+
+        <Button variant="outline" size="sm" className="ml-auto">
+          Add Income
+        </Button>
       </CardContent>
     </Card>
   );

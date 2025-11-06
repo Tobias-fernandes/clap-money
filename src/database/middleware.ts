@@ -10,6 +10,8 @@ const PUBLIC_ROUTES = [
   "/forbidden",
 ];
 
+const PRIVATE_ROUTES = ["/dashboard", "/user"];
+
 const updateSession = async (request: NextRequest) => {
   let supabaseResponse = NextResponse.next({
     request,
@@ -49,15 +51,17 @@ const updateSession = async (request: NextRequest) => {
   } = await supabase.auth.getUser();
 
   const isPublicRoute = PUBLIC_ROUTES.indexOf(request.nextUrl.pathname) !== -1;
+  const isPrivateRoute =
+    PRIVATE_ROUTES.indexOf(request.nextUrl.pathname) !== -1;
 
   // Block access to private routes when not logged in
-  if (!user && !isPublicRoute) {
+  if (!user && !isPublicRoute && isPrivateRoute) {
     const url = request.nextUrl.clone();
     url.pathname = "/forbidden";
     return NextResponse.redirect(url);
   }
 
-  // Allow access to dashboard if logged in
+  // Allow access to dashboard when accessing sign-in page if already logged in
   if (user && request.nextUrl.pathname === "/sign-in") {
     const url = request.nextUrl.clone();
     url.pathname = "/dashboard";
