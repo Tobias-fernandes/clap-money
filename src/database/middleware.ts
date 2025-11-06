@@ -48,10 +48,19 @@ const updateSession = async (request: NextRequest) => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user && PUBLIC_ROUTES.indexOf(request.nextUrl.pathname) === -1) {
-    // no user, potentially respond by redirecting the user to the login page
+  const isPublicRoute = PUBLIC_ROUTES.indexOf(request.nextUrl.pathname) !== -1;
+
+  // Block access to private routes when not logged in
+  if (!user && !isPublicRoute) {
     const url = request.nextUrl.clone();
     url.pathname = "/forbidden";
+    return NextResponse.redirect(url);
+  }
+
+  // Allow access to dashboard if logged in
+  if (user && request.nextUrl.pathname === "/sign-in") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/dashboard";
     return NextResponse.redirect(url);
   }
 
