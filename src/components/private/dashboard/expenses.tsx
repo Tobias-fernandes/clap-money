@@ -1,3 +1,6 @@
+"use client";
+
+import z from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -6,25 +9,50 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { BanknoteArrowDown } from "lucide-react";
+import { BanknoteArrowDown, Loader2Icon } from "lucide-react";
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 interface IExpense {
   expense: number;
 }
 
+const formSchema = z.object({
+  expense: z.string().min(1, "Expense name is required"),
+  amount: z.string().min(1, "Amount is required"),
+});
+
 const ModalCreateExpense = () => {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      expense: "",
+      amount: "",
+    },
+  });
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log(values);
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -39,22 +67,59 @@ const ModalCreateExpense = () => {
             Fill in the form below to add a new expense to your dashboard.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4">
-          <div className="grid gap-3">
-            <Label htmlFor="name-1">Name</Label>
-            <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="username-1">Username</Label>
-            <Input id="username-1" name="username" defaultValue="@peduarte" />
-          </div>
-        </div>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DialogClose>
-          <Button type="submit">Add Expense</Button>
-        </DialogFooter>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField
+              control={form.control}
+              name="expense"
+              render={({ field }) => (
+                <FormItem className="mb-5">
+                  <FormLabel>Expense Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter expense name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="amount"
+              render={({ field }) => (
+                <FormItem className="mb-5">
+                  <FormLabel>Amount</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter the amount"
+                      type="number"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex items-center justify-end gap-4 mt-4">
+              <DialogClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DialogClose>
+              <Button
+                type="submit"
+                variant={"clap"}
+                disabled={form.formState.isSubmitting}
+              >
+                {form.formState.isSubmitting && (
+                  <>
+                    <Loader2Icon className="animate-spin" />
+                    <span>Adding...</span>
+                  </>
+                )}
+                {!form.formState.isSubmitting && <span>Add Expense</span>}
+              </Button>
+            </div>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );

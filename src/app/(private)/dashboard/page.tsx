@@ -13,21 +13,21 @@ const listExpenses = [
   {
     id: 1,
     description: "Groceries",
-    amount: 50,
+    amount: 37.43,
     date: "2024-06-01",
     category: "Food",
   },
   {
     id: 2,
     description: "Utilities",
-    amount: 30,
+    amount: 30.99,
     date: "2024-06-03",
     category: "Food",
   },
   {
     id: 3,
     description: "Transport",
-    amount: 40,
+    amount: 89.89,
     date: "2024-06-05",
     category: "Food",
   },
@@ -42,12 +42,11 @@ const Dashboard: React.FC = async () => {
           <Incomes income={data.income} />
           <Expenses expense={data.expense} />
         </div>
-        <div className="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
+        <div className="flex flex-col md:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
           <LastExpenses list={listExpenses} />
           <BalanceChart />
         </div>
-        <div>
-        </div>
+        <div></div>
       </div>
     </section>
   );

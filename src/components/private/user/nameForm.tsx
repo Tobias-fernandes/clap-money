@@ -66,10 +66,10 @@ const NameForm = () => {
           {form.formState.isSubmitting && (
             <>
               <Loader2Icon className="animate-spin" />
-              <span>Saving name...</span>
+              <span>Saving Name...</span>
             </>
           )}
-          {!form.formState.isSubmitting && <span>Save name</span>}
+          {!form.formState.isSubmitting && <span>Save Name</span>}
         </Button>
       </form>
     </Form>
