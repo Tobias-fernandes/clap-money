@@ -30,6 +30,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface IExpense {
   expense: number;
@@ -38,6 +45,7 @@ interface IExpense {
 const formSchema = z.object({
   expense: z.string().min(1, "Expense name is required"),
   amount: z.string().min(1, "Amount is required"),
+  category: z.string().min(1, "Category is required"),
 });
 
 const ModalCreateExpense = () => {
@@ -46,6 +54,7 @@ const ModalCreateExpense = () => {
     defaultValues: {
       expense: "",
       amount: "",
+      category: "",
     },
   });
 
@@ -83,6 +92,7 @@ const ModalCreateExpense = () => {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="amount"
@@ -100,6 +110,34 @@ const ModalCreateExpense = () => {
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem className="mb-5">
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="food">Food</SelectItem>
+                      <SelectItem value="transport">Transport</SelectItem>
+                      <SelectItem value="bills">Bills</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <div className="flex items-center justify-end gap-4 mt-4">
               <DialogClose asChild>
                 <Button variant="outline">Cancel</Button>

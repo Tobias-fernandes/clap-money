@@ -21,7 +21,7 @@ import { toast } from "sonner";
 import { Loader2Icon } from "lucide-react";
 
 import { useRouter } from "next/navigation";
-import { signUp } from "@/server/sign-up/actions";
+import { signUp } from "@/server/auth/sign-up/actions";
 
 const formSchema = z
   .object({

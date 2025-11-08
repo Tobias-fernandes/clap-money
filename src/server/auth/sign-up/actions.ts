@@ -18,6 +18,7 @@ const signUp = async (email: string, password: string) => {
     throw new Error(error.message);
   }
 
+  // TODO: Analyze if revalidation is necessary here
   revalidatePath("/dashboard", "layout");
 };
 

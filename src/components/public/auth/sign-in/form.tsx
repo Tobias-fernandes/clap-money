@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { toast } from "sonner";
 import { Loader2Icon } from "lucide-react";
-import { signIn } from "@/server/sign-in/actions";
+import { signIn } from "@/server/auth/sign-in/actions";
 
 const formSchema = z.object({
   email: z.email({
@@ -95,7 +95,7 @@ const LoginForm = () => {
             <FormItem className="mb-5">
               <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <Input placeholder="Digite seu email" {...field} />
+                <Input placeholder="Enter your email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

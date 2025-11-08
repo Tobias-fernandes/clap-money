@@ -10,8 +10,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { deleteAccount } from "@/server/delete-account/actions";
-import { getUser } from "@/server/get-user/actions";
+import { deleteAccount } from "@/server/auth/delete-account/actions";
+import { getUser } from "@/server/auth/get-user/actions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -49,7 +49,10 @@ const DeleteAccountForm = () => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDeleteAccount} className="bg-red-600 hover:bg-red-500">
+          <AlertDialogAction
+            onClick={handleDeleteAccount}
+            className="bg-red-600 hover:bg-red-500"
+          >
             Delete Account
           </AlertDialogAction>
         </AlertDialogFooter>
