@@ -43,7 +43,7 @@ const NameForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmitUserName)}
-        className="flex items-center gap-4"
+        className="flex gap-4"
       >
         <FormField
           control={form.control}
@@ -60,7 +60,8 @@ const NameForm = () => {
         />
         <Button
           type="submit"
-          className="mt-5"
+          // TODO: Upgrade button positioning
+          className="mt-[21px]"
           disabled={form.formState.isSubmitting || !form.formState.isValid}
         >
           {form.formState.isSubmitting && (

@@ -40,7 +40,8 @@ const UserConfig: React.FC = () => {
             <Line />
             <CardDescription></CardDescription>
           </CardHeader>
-          <CardContent className="sm:ml-10 space-y-12 max-w-sm">
+          <CardContent className="sm:ml-10 space-y-12 max-w-md">
+            {/* TODO: Align the end */}
             <ProfileForm />
             <NameForm />
             <EmailForm />
@@ -53,8 +54,7 @@ const UserConfig: React.FC = () => {
             <Line />
             <CardDescription></CardDescription>
           </CardHeader>
-          <CardContent className="sm:ml-10">
-          </CardContent>
+          <CardContent className="sm:ml-10"></CardContent>
         </Card>
 
         <Card className="w-full">

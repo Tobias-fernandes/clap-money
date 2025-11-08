@@ -137,7 +137,6 @@ const LoginForm = () => {
           type="submit"
           size={"lg"}
           className="mt-5 w-full"
-          variant={"clap"}
           disabled={form.formState.isSubmitting}
         >
           {form.formState.isSubmitting && (

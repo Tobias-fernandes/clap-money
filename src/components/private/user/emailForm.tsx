@@ -12,13 +12,14 @@ const EmailForm = () => {
 
   return (
     <>
-      <Label htmlFor="email" className="mb-2">
+      <Label htmlFor="email" className="text-sm font-medium">
         Email Address
       </Label>
       <Input
         id="email"
         placeholder="Your Email"
         defaultValue={handleGetUserEmail()}
+        className="mt-1"
         disabled
       />
     </>

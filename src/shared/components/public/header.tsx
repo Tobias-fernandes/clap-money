@@ -65,7 +65,7 @@ const Header: React.FC = () => {
 
         <div className="flex items-center gap-4">
           <ToggleDarkMode />
-          <Button variant={"clap"} asChild>
+          <Button asChild>
             <Link href="/sign-in">Login</Link>
           </Button>
         </div>
@@ -105,7 +105,7 @@ const Header: React.FC = () => {
                 <Line />
                 <ToggleDarkMode />
                 <DrawerClose asChild>
-                  <Button asChild type="button" variant={"clap"} size={"lg"}>
+                  <Button asChild type="button" size={"lg"}>
                     <Link className="w-full" href="/sign-in">
                       Log In
                     </Link>

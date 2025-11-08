@@ -144,7 +144,6 @@ const ModalCreateIncome = () => {
               </DialogClose>
               <Button
                 type="submit"
-                variant={"clap"}
                 disabled={form.formState.isSubmitting}
               >
                 {form.formState.isSubmitting && (
