@@ -7,15 +7,13 @@ import { Settings, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { createClient } from "@/database/supabaseClient";
+import Link from "next/link";
+import type { Route } from "next";
 
 const supabase = createClient();
 
 const Header: React.FC = () => {
   const router = useRouter();
-
-  const handleGetUserConfig = () => {
-    router.push("/user");
-  };
 
   const handleLogOut = async () => {
     const { error } = await supabase.auth.signOut();
@@ -55,7 +53,9 @@ const Header: React.FC = () => {
 
         <div className="flex items-center gap-6">
           <ToggleDarkMode />
-          <Settings className="cursor-pointer" onClick={handleGetUserConfig} />
+          <Link href={"/user" as Route}>
+            <Settings />
+          </Link>
           <LogOut className="cursor-pointer" onClick={handleLogOut} />
         </div>
       </div>

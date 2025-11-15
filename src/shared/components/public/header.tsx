@@ -17,6 +17,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Line } from "./line";
+import { Route } from "next";
 
 interface MenuItens {
   name: string;
@@ -36,7 +37,7 @@ const NavigationMenu: React.FC = () => {
       {menuItems.map(({ name, href }, index) => (
         <Link
           key={index}
-          href={href}
+          href={href as Route}
           className={cn(
             "text-lg transition-colors",
             pathName === href || pathName?.startsWith(`${href}/`)
@@ -93,7 +94,7 @@ const Header: React.FC = () => {
                   {menuItems.map(({ name, href }, index) => {
                     return (
                       <DrawerClose asChild key={index}>
-                        <Link className="text-md" href={href}>
+                        <Link className="text-md" href={href as Route}>
                           {name}
                         </Link>
                       </DrawerClose>

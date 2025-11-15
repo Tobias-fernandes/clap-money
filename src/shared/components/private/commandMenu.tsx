@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/command";
 import { CommandGroup } from "cmdk";
 import { LayoutDashboard, Settings } from "lucide-react";
+import { Route } from "next";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -48,7 +49,7 @@ const CommandMenu = () => {
               onSelect={() => setOpen(false)}
               className="hover:bg-gray-100"
             >
-              <Link href={path.href} className="flex items-center gap-2 w-full">
+              <Link href={path.href as Route} className="flex items-center gap-2 w-full">
                 <path.icon /> {path.name}
               </Link>
             </CommandItem>
