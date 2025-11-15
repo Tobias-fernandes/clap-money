@@ -1,21 +1,19 @@
 "use client";
 
-import * as React from "react";
+import { forwardRef, InputHTMLAttributes, useState } from "react";
+
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/shared/lib/tw-merge";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+type InputProps = InputHTMLAttributes<HTMLInputElement>;
 
-const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...props }, ref) => {
-    const [showPassword, setShowPassword] = React.useState(false);
-    const disabled =
-      props.value === "" || props.value === undefined || props.disabled;
+const PasswordInput = forwardRef<HTMLInputElement, InputProps>(
+  ({ value, disabled, className, ...props }, ref) => {
+    const [showPassword, setShowPassword] = useState(false);
+    const disabledButton = value === "" || value === undefined || disabled;
 
     return (
       <div className="relative">
@@ -31,9 +29,9 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
           size="sm"
           className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
           onClick={() => setShowPassword((prev) => !prev)}
-          disabled={disabled}
+          disabled={disabledButton}
         >
-          {showPassword && !disabled ? (
+          {showPassword && !disabledButton ? (
             <EyeIcon className="h-4 w-4" aria-hidden="true" />
           ) : (
             <EyeOffIcon className="h-4 w-4" aria-hidden="true" />

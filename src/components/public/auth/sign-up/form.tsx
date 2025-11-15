@@ -22,6 +22,8 @@ import { Loader2Icon } from "lucide-react";
 
 import { useRouter } from "next/navigation";
 import { signUp } from "@/server/auth/sign-up/actions";
+import { getCookie } from "@/shared/lib/cookies";
+import type { Route } from "next";
 
 const formSchema = z
   .object({
@@ -43,7 +45,7 @@ const formSchema = z
 const SignUpHeader: React.FC = () => {
   return (
     <div className="flex flex-col items-center space-y-2">
-      <Link href="/" className="flex text-4xl font-extrabold">
+      <Link href={"/" as Route} className="flex text-4xl font-extrabold">
         ClapMoney
       </Link>
       <h1 className="text-2xl leading-tight tracking-tight md:text-3xl">
@@ -56,7 +58,7 @@ const SignUpHeader: React.FC = () => {
 const SignUpFooter: React.FC = () => (
   <p>
     <span>Already have an account?</span>
-    <Link href="/sign-in" className="ml-2 font-bold">
+    <Link href={"/sign-in" as Route} className="ml-2 font-bold">
       Sign in here
     </Link>
   </p>
@@ -76,9 +78,14 @@ const LoginForm = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      const isUserAgreedCookies = getCookie("cookie-consent");
+      if (!isUserAgreedCookies) {
+        throw new Error("You must accept cookies to sign up.");
+      }
+
       await signUp(values.email, values.password);
       toast.success("Account created successfully! Please check your email.");
-      router.push("/sign-in");
+      router.push("/sign-in" as Route);
     } catch (err) {
       toast.error(
         (err as Error).message || "Something went wrong. Please try again."
@@ -96,7 +103,11 @@ const LoginForm = () => {
             <FormItem className="mb-5">
               <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <Input placeholder="Digite seu email" {...field} />
+                <Input
+                  placeholder="Digite seu email"
+                  autoComplete="email"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -110,7 +121,11 @@ const LoginForm = () => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <PasswordInput placeholder="Enter your password" {...field} />
+                <PasswordInput
+                  placeholder="Enter your password"
+                  autoComplete="new-password"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -126,6 +141,7 @@ const LoginForm = () => {
               <FormControl>
                 <PasswordInput
                   placeholder="Enter your password again"
+                  autoComplete="new-password"
                   {...field}
                 />
               </FormControl>

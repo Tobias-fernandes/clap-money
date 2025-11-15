@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import WordPullUp from "@/components/ui/word-pull-up";
+import type { Route } from "next";
 import Link from "next/link";
 
 const Hero: React.FC = () => {
@@ -19,7 +20,7 @@ const Hero: React.FC = () => {
           variant={"secondary"}
           className="text-lg max-sm:w-full transition-all hover:scale-[1.02]"
         >
-          <Link href="/dashboard">Get Started</Link>
+          <Link href={"/dashboard" as Route}>Get Started</Link>
         </Button>
       </div>
     </section>

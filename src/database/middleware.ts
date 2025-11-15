@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import type { Route } from "next";
 
 const PUBLIC_ROUTES = [
   "/",
@@ -57,14 +58,14 @@ const updateSession = async (request: NextRequest) => {
   // Block access to private routes when not logged in
   if (!user && !isPublicRoute && isPrivateRoute) {
     const url = request.nextUrl.clone();
-    url.pathname = "/forbidden";
+    url.pathname = "/unauthorized" as Route;
     return NextResponse.redirect(url);
   }
 
   // Allow access to dashboard when accessing sign-in page if already logged in
-  if (user && request.nextUrl.pathname === "/sign-in") {
+  if (user && request.nextUrl.pathname === ("/sign-in" as Route)) {
     const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
+    url.pathname = "/dashboard" as Route;
     return NextResponse.redirect(url);
   }
 

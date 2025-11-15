@@ -21,6 +21,9 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { toast } from "sonner";
 import { Loader2Icon } from "lucide-react";
 import { signIn } from "@/server/auth/sign-in/actions";
+import { getCookie } from "@/shared/lib/cookies";
+
+import type { Route } from "next";
 
 const formSchema = z.object({
   email: z.email({
@@ -34,7 +37,7 @@ const formSchema = z.object({
 const SignInHeader: React.FC = () => {
   return (
     <div className="flex flex-col items-center space-y-2">
-      <Link href="/" className="flex text-4xl font-extrabold">
+      <Link href={"/" as Route} className="flex text-4xl font-extrabold">
         ClapMoney
       </Link>
       <h1 className="text-2xl leading-tight tracking-tight md:text-3xl">
@@ -47,7 +50,7 @@ const SignInHeader: React.FC = () => {
 const SignInFooter: React.FC = () => (
   <p>
     <span>Don&apos;t have an account?</span>
-    <Link href="/sign-up" className="ml-2 font-bold">
+    <Link href={"/sign-up" as Route} className="ml-2 font-bold">
       Sign up
     </Link>
   </p>
@@ -55,7 +58,10 @@ const SignInFooter: React.FC = () => (
 
 const SignInForgot: React.FC = () => (
   <div className="flex items-center justify-end">
-    <Link href="/forgot-password" className="text-sm text-primary/50">
+    <Link
+      href={"/forgot-password" as Route}
+      className="text-sm text-primary/50"
+    >
       Forgot your password?
     </Link>
   </div>
@@ -74,10 +80,15 @@ const LoginForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      const isUserAgreedCookies = getCookie("cookie-consent");
+      if (!isUserAgreedCookies) {
+        throw new Error("You must accept cookies to sign in.");
+      }
+
       await signIn(values.email, values.password);
 
       toast.success("Successfully signed in!");
-      router.push("/dashboard");
+      router.push("/dashboard" as Route);
     } catch (error) {
       toast.error(
         (error as Error).message || "Something went wrong. Please try again."
@@ -95,7 +106,11 @@ const LoginForm = () => {
             <FormItem className="mb-5">
               <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your email" {...field} />
+                <Input
+                  placeholder="Enter your email"
+                  autoComplete="email"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -109,7 +124,11 @@ const LoginForm = () => {
             <FormItem className="mt-5">
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <PasswordInput placeholder="Enter your password" {...field} />
+                <PasswordInput
+                  placeholder="Enter your password"
+                  autoComplete="current-password"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
