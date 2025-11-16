@@ -9,11 +9,16 @@ import { toast } from "sonner";
 import { createClient } from "@/database/supabaseClient";
 import Link from "next/link";
 import type { Route } from "next";
+import { useStoreUser } from "@/context/user";
 
 const supabase = createClient();
 
 const Header: React.FC = () => {
   const router = useRouter();
+
+  const {
+    state: { name, avatarUrl },
+  } = useStoreUser();
 
   const handleLogOut = async () => {
     const { error } = await supabase.auth.signOut();
@@ -24,30 +29,19 @@ const Header: React.FC = () => {
     router.push("/");
   };
 
-  const getUserName = () => {
-    // TODO: Get user name from database
-    const userName = "Tobias";
-    return <span className="font-medium capitalize">{userName}</span>;
-  };
-
-  const getUserAvatar = () => {
-    // TODO: Get user photo from database
-    const userPhoto = "https://github.com/shadcn.png";
-    return userPhoto;
-  };
-
   return (
     <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 backdrop-blur-md bg-background/70 border border-border shadow-md rounded-2xl px-6 py-3 w-[90%] max-w-2xl transition-all duration-300">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-3">
             <Avatar>
-              <AvatarImage src={getUserAvatar()} />
+              <AvatarImage src={avatarUrl} />
               <AvatarFallback>
                 <Skeleton className="h-6 w-6 rounded-full" />
               </AvatarFallback>
             </Avatar>
-            {getUserName()}
+            {!name && <Skeleton className="h-5 w-20 rounded-md" />}
+            {name && <span className="font-medium capitalize">{name}</span>}
           </div>
         </div>
 
