@@ -10,9 +10,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useStoreUser } from "@/context/user";
+import { setUserName } from "@/server/user/name/update-name/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2Icon } from "lucide-react";
+import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
 import z from "zod";
 
 const formSchema = z.object({
@@ -22,22 +27,41 @@ const formSchema = z.object({
 });
 
 const NameForm = () => {
-  const handleGetUserName = () => {
-    // TODO: Get user name from database
-    const userName = "John Doe";
-    return userName;
-  };
-
-  const handleSubmitUserName = () => {
-    // TODO: Implement submit user name logic
-  };
+  const {
+    state: { name, isLoading: userLoading },
+    actions: { fetchUserData },
+  } = useStoreUser();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: handleGetUserName() as string,
+      name: name,
     },
   });
+
+  const handleSubmitUserName = async () => {
+    // TODO: Implement submit user name logic
+    try {
+      const newName = form.getValues("name");
+      await setUserName({ newName });
+      await fetchUserData();
+      toast.success("Name updated successfully.");
+    } catch (err) {
+      toast.error(
+        (err as Error)?.message || "Failed to update name. Please try again."
+      );
+    }
+  };
+
+  const updateInputValue = useCallback(() => {
+    if (!userLoading && name) {
+      form.setValue("name", name);
+    }
+  }, [userLoading, name, form]);
+
+  useEffect(() => {
+    updateInputValue();
+  }, [updateInputValue]);
 
   return (
     <Form {...form}>
@@ -52,7 +76,11 @@ const NameForm = () => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Your Name" {...field} />
+                <Input
+                  placeholder={userLoading ? "Loading..." : "Enter your name"}
+                  {...field}
+                  disabled={userLoading}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -64,13 +92,13 @@ const NameForm = () => {
           className="mt-[21px]"
           disabled={form.formState.isSubmitting || !form.formState.isValid}
         >
+          {!form.formState.isSubmitting && <span>Save Name</span>}
           {form.formState.isSubmitting && (
             <>
               <Loader2Icon className="animate-spin" />
               <span>Saving Name...</span>
             </>
           )}
-          {!form.formState.isSubmitting && <span>Save Name</span>}
         </Button>
       </form>
     </Form>

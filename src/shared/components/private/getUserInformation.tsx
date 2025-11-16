@@ -4,11 +4,11 @@
 import { ReactNode, useEffect } from "react";
 import { useStoreUser } from "@/context/user";
 
-interface IGetUSerInformation {
+interface IGetUserInformation {
   children: ReactNode;
 }
 
-const GetUserInformation = ({ children }: IGetUSerInformation) => {
+const GetUserInformation = ({ children }: IGetUserInformation) => {
   const fetchUserData = useStoreUser((state) => state.actions.fetchUserData);
 
   useEffect(() => {
