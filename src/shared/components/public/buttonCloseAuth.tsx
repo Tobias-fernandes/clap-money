@@ -15,7 +15,7 @@ const ButtonCloseAuth = () => {
     <Button
       className="absolute top-5 right-5 rounded-full p-2"
       asChild
-      variant={"secondary"}
+      variant={"outline"}
       size={"icon"}
     >
       <Link

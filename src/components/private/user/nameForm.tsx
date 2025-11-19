@@ -10,6 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useStoreUser } from "@/context/user";
 import { setUserName } from "@/server/user/name/update-name/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,12 +18,11 @@ import { Loader2Icon } from "lucide-react";
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-
 import z from "zod";
 
 const formSchema = z.object({
-  name: z.string().min(1, { message: "Name is required." }).max(30, {
-    message: "Name must be at most 30 characters long.",
+  name: z.string().min(1, { message: "Name is required." }).max(25, {
+    message: "Name must be at most 25 characters long.",
   }),
 });
 
@@ -40,10 +40,13 @@ const NameForm = () => {
   });
 
   const handleSubmitUserName = async () => {
-    // TODO: Implement submit user name logic
     try {
       const newName = form.getValues("name");
-      await setUserName({ newName });
+      if (newName === name)
+        throw new Error(
+          "The new name must be different from the current name."
+        );
+      setUserName({ newName });
       await fetchUserData();
       toast.success("Name updated successfully.");
     } catch (err) {
@@ -63,6 +66,10 @@ const NameForm = () => {
     updateInputValue();
   }, [updateInputValue]);
 
+  if (userLoading) {
+    return <Skeleton className="h-10 w-full rounded-md" />;
+  }
+
   return (
     <Form {...form}>
       <form
@@ -77,7 +84,8 @@ const NameForm = () => {
               <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input
-                  placeholder={userLoading ? "Loading..." : "Enter your name"}
+                  className="capitalize"
+                  placeholder="Enter your name"
                   {...field}
                   disabled={userLoading}
                 />

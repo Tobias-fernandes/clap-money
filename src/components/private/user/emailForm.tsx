@@ -1,14 +1,18 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useStoreUser } from "@/context/user";
 import { Label } from "@radix-ui/react-label";
 
 const EmailForm = () => {
-  const handleGetUserEmail = () => {
-    // TODO: Get user email from database
-    const userEmail = "johndoe@yahoo.com";
-    return userEmail;
-  };
+  const {
+    state: { email, isLoading: userLoading },
+  } = useStoreUser();
+
+  if (userLoading) {
+    return <Skeleton className="h-10 w-full rounded-md" />;
+  }
 
   return (
     <>
@@ -17,8 +21,9 @@ const EmailForm = () => {
       </Label>
       <Input
         id="email"
-        placeholder="Your Email"
-        defaultValue={handleGetUserEmail()}
+        aria-busy={userLoading}
+        placeholder="loading..."
+        defaultValue={email}
         className="mt-1"
         disabled
       />

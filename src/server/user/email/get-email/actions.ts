@@ -9,7 +9,7 @@ const getUserEmail = async () => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  return user?.email;
+  return user?.email || "email not found";
 };
 
 export { getUserEmail };

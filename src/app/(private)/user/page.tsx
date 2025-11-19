@@ -13,14 +13,8 @@ import {
 } from "@/components/ui/card";
 import { ButtonBack } from "@/shared/components/public/buttonBack";
 import { Line } from "@/shared/components/public/line";
-import { useRouter } from "next/navigation";
 
 const UserConfig: React.FC = () => {
-  const router = useRouter();
-
-  const handleBack = () => {
-    router.back();
-  };
   return (
     <section className="mt-40">
       <div className="relative container px-6 max-w-5xl mx-auto space-y-4">
@@ -28,7 +22,7 @@ const UserConfig: React.FC = () => {
           variant={"ghost"}
           size={"lg"}
           className="absolute left-4 -top-16"
-          onClick={handleBack}
+          route="/dashboard"
         />
         <h1 className="text-2xl font-bold">User Profile</h1>
         <p className="text-muted-foreground">

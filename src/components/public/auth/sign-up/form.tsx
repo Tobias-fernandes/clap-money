@@ -104,7 +104,7 @@ const LoginForm = () => {
               <FormLabel>E-mail</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Digite seu email"
+                  placeholder="Enter your email"
                   autoComplete="email"
                   {...field}
                 />

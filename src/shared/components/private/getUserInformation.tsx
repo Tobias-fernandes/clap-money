@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { ReactNode, useEffect } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import { useStoreUser } from "@/context/user";
 
-interface IGetUserInformation {
-  children: ReactNode;
-}
+const GetUserInformation = ({ children }: PropsWithChildren) => {
+  const {
+    actions: { fetchUserData },
+  } = useStoreUser();
 
-const GetUserInformation = ({ children }: IGetUserInformation) => {
-  const fetchUserData = useStoreUser((state) => state.actions.fetchUserData);
+  const fetchUserDataFN = fetchUserData;
 
   useEffect(() => {
-    fetchUserData();
+    fetchUserDataFN();
   }, []);
 
   return <>{children}</>;

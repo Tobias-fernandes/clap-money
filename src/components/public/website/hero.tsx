@@ -14,14 +14,23 @@ const Hero: React.FC = () => {
         <p className="mb-10 text-base md:text-lg lg:text-xl text-primary/60 max-w-2xl mx-auto text-balance">
           Your one-stop solution for managing your finances effortlessly.
         </p>
-        <Button
-          asChild
-          size="lg"
-          variant={"secondary"}
-          className="text-lg max-sm:w-full transition-all hover:scale-[1.02]"
-        >
-          <Link href={"/dashboard" as Route}>Get Started</Link>
-        </Button>
+        <div className="flex gap-2 max-sm:flex-col justify-center">
+          <Button
+            asChild
+            size="lg"
+            className="text-lg max-sm:w-full transition-all hover:scale-[1.02]"
+          >
+            <Link href={"/sign-in" as Route}>Get Started</Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant={"secondary"}
+            className="text-lg max-sm:w-full transition-all hover:scale-[1.02]"
+          >
+            <Link href={"/dashboard" as Route}>Open Dashboard</Link>
+          </Button>
+        </div>
       </div>
     </section>
   );
