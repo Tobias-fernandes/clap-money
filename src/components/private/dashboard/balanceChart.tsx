@@ -19,24 +19,22 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const chartData = [
-  { month: "January", incomes: 186, expenses: 80 },
-  { month: "February", incomes: 305, expenses: 200 },
-  { month: "March", incomes: 237, expenses: 120 },
-  { month: "April", incomes: 73, expenses: 190 },
-  { month: "May", incomes: 209, expenses: 130 },
-  { month: "June", incomes: 214, expenses: 140 },
-];
+interface IBalanceChart {
+  data: {
+    month: string;
+    incomes: number;
+    expenses: number;
+  }[];
+}
 
-const BalanceChart = () => {
+const BalanceChart: React.FC<IBalanceChart> = ({ data }) => {
   return (
     <ChartContainer config={chartConfig} className="w-full">
-      <BarChart accessibilityLayer data={chartData}>
+      <BarChart accessibilityLayer data={data}>
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey="month"
           tickLine={false}
-          tickMargin={10}
           axisLine={false}
           tickFormatter={(value) => value.slice(0, 3)}
         />

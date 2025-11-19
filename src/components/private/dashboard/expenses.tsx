@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { BanknoteArrowDown, Loader2Icon } from "lucide-react";
+import { BanknoteArrowDown } from "lucide-react";
 import {
   Dialog,
   DialogClose,
@@ -37,6 +37,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Spinner } from "@/components/ui/spinner";
 
 interface IExpense {
   expense: number;
@@ -133,6 +134,10 @@ const ModalCreateExpense = () => {
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
+                  <p className="text-sm text-muted-foreground">
+                    Wanna add or change a new category? Go to settings and add
+                    one there.
+                  </p>
                   <FormMessage />
                 </FormItem>
               )}
@@ -142,13 +147,10 @@ const ModalCreateExpense = () => {
               <DialogClose asChild>
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
-              <Button
-                type="submit"
-                disabled={form.formState.isSubmitting}
-              >
+              <Button type="submit" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting && (
                   <>
-                    <Loader2Icon className="animate-spin" />
+                    <Spinner className="mr-2 h-4 w-4" />
                     <span>Adding...</span>
                   </>
                 )}

@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { BanknoteArrowUp, Loader2Icon } from "lucide-react";
+import { BanknoteArrowUp } from "lucide-react";
 import {
   Dialog,
   DialogClose,
@@ -37,6 +37,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Spinner } from "@/components/ui/spinner";
 
 interface IIncome {
   income: number;
@@ -133,6 +134,7 @@ const ModalCreateIncome = () => {
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
+
                   <FormMessage />
                 </FormItem>
               )}
@@ -145,7 +147,7 @@ const ModalCreateIncome = () => {
               <Button type="submit" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting && (
                   <>
-                    <Loader2Icon className="animate-spin" />
+                    <Spinner className="mr-2 h-4 w-4" />
                     <span>Adding...</span>
                   </>
                 )}
