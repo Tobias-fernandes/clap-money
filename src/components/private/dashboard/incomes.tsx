@@ -134,7 +134,10 @@ const ModalCreateIncome = () => {
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
-
+                  <p className="text-sm text-muted-foreground">
+                    Wanna add or change a new category? Go to settings and add
+                    one there.
+                  </p>
                   <FormMessage />
                 </FormItem>
               )}
